@@ -29,6 +29,17 @@ async function updateCourse(id) {
     }
 }
 
+
+async function getCourse(id) {
+    try {
+
+        return result = Course.findOne({ _id: id })
+            
+    } catch (err) {
+        throw err;
+    }
+}
+
 async function deleteCourse(id) {
     try {
 
@@ -93,7 +104,8 @@ module.exports = {
     listCourse,
     listStudent,
     addStudent,
-    searchStudent
+    searchStudent,
+    getCourse
 
 
 }

@@ -95,7 +95,7 @@ async function showOption() {
 if (!process.env.MONGO_URI) {
   throw new Error("MONGO URL IS MISSING FROM ENV ");
 }
-const connection = mongoose.connect(process.env.MONGO_URI, {
+const connection = mongoose.connect(process.env.MONGO_STUDENT, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // useFindAndModify: false,
