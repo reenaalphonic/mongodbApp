@@ -28,4 +28,15 @@ app.post('/create-checkout-session', async (req, res) => {
  
 });
 
-app.listen(4242, () => console.log('Running on port 4242'));
+
+
+async function payout (){
+
+const customer = await stripe.customers.create({
+  description: 'My First Test Customer (created for API docs)',
+});
+return customer
+}
+
+console.log( payout())
+// app.listen(4242, () => console.log('Running on port 4242'));

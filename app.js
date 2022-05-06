@@ -18,11 +18,13 @@ const connection = mongoose.connect(process.env.MONGO_Admin ,{
 });
 
 const app = express();
-const cache = new NodeCache({ stdTTL: 3 ,maxKeys:1 ,checkperiod:1});
+const cache = new NodeCache({ stdTTL: 3 ,maxKeys:2 ,checkperiod:1});
 
 obj = { my: "Special", variable: 42 };
+obj1 = { my: "Special", variable: 42 };
 
 success = cache.set( "myKey", obj );
+success = cache.set( "myKey", obj1 );
 
 
 app.get("/", (req, res) => {
