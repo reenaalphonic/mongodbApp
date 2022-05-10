@@ -38,7 +38,7 @@ var time_difference = iso2.getTime() - iso1.getTime();
 var days_difference = time_difference / (1000 * 60 * 60 * 24);  
 
 
-console.log(days_difference)
+// console.log(days_difference)
 
 
 
@@ -54,13 +54,13 @@ let coupon= {
     }
 
 
-    console.log("Coupon TEsting ,,,,", Object.values(coupon).length);
+    // console.log("Coupon TEsting ,,,,", Object.values(coupon).length);
 
     const timeDiff = (earlyTime , latertime) => {
 
         
-        earlyTime = new Date("2022-04-29T08:53:33.150Z")
-        latertime = new Date("2022-04-29T07:23:33.156Z")
+        latertime = new Date("2022-05-09T06:58:59.122Z")
+        earlyTime = new Date("2022-05-09T05:33:59.122Z")
 
         let date1 = earlyTime.getTime()
         let date2 = latertime.getTime()

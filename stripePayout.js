@@ -9,141 +9,77 @@ app.use(express.json());
 
 
 
-async function createAccount(){
 
-const account = await stripe.accounts.create({
-  type: 'custom',
-  country: 'SG',
-  email: 'jenny.rosen@example.com',
-  capabilities: {
-    card_payments: {requested: true},
-    transfers: {requested: true},
+
+async function createBankToken() {
+ 
+const token = await stripe.tokens.create({
+  bank_account: {
+    country: 'SG',
+    currency: 'sgd',
+    account_holder_name: 'Jenny Rosen',
+    account_holder_type: 'individual',
+    routing_number: '1100-000',
+    account_number: '000123456',
   },
 });
-return account
+  return token
 }
-
-
-async function deleteAccount(id){
-    const deleted = await stripe.accounts.del(
-       id
-      );
-
-      return deleted
-}
-
-async function updateAccount(id){
-    const account = await stripe.accounts.update(
-        id,
-         {tos_acceptance: {date: 1609798905, ip: '8.8.8.8'}}
-       
-      );
-      return account
-}
-
-
- async function getAccount(id){
-    const account = await stripe.accounts.retrieve(
-        id
-      );
-      return account
- }
-
-   async function createBankToken(){
-    const token = await stripe.tokens.create({
-        bank_account: {
-          country: 'SG',
-          currency: 'sgd',
-          account_holder_name: 'Jenny Rosen',
-          account_holder_type: 'individual',
-          
-         routing_number: '1100-000',
-          account_number: '000123456',
-        },
-      });
-      return token
-   }
 
 // btok_1Kw12SIkon1wZ3rnGajkFUYU ----- BAnk token
 
- async function createExternalAccount(id){
-    const bankAccount = await stripe.accounts.createExternalAccount(
-        id,
-        {
-          external_account: 'btok_1Kw12SIkon1wZ3rnGajkFUYU',
-        }
-      );
-      return bankAccount
- }
-
- //ba_1Kw1LzRIFrHDUENYR4TRlpvs -- External Account
-
-
-async function createTopup(){
-    const topup = await stripe.topups.create({
-        amount: 2000,
-        currency: 'sgd',
-        description: 'Top-up for week of May 31',
-        statement_descriptor: 'Weekly top-up',
-      });
-
-      return topup.id
+async function createExternalAccount() {
+  const bankAccount = await stripe.accounts.createExternalAccount(
+    'acct_1KvaUcIkon1wZ3rn',
+    {
+      external_account: 'btok_1KxlUVIkon1wZ3rnCKII001v',
+    }
+  );
+  return bankAccount
 }
 
+//ba_1Kw1LzRIFrHDUENYR4TRlpvs -- External Account
 
 
-async function createcarge() {
-    let charged;
-    try {
+
+
+
+
+async function payout() {
+const payout = await stripe.payouts.create({
+  amount: 100,
+  currency: 'sgd',
+  destination: "ba_1Kxll6Ikon1wZ3rnnuEcgZkC"
+
+}, {
+  stripeAccount: 'acct_1KvaUcIkon1wZ3rn',
+});
+return payout
+}
+
+ async function accountBankAccounts(){
+  const accountBankAccounts = await stripe.accounts.listExternalAccounts(
+    'acct_1KvaUcIkon1wZ3rn',
+    {object: 'bank_account'}
     
-    const paymentIntent = await stripe.paymentIntents.create({
-    amount: 10000,
-    currency: 'sgd',
-    payment_method_types: ['card'],
-  }, {
-    stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
-  });
-      console.log(paymentIntent.id)
-    } catch (err) {
-      console.log(err.message);
-    }
-  
-  }
-  
-  
-  async function confirmPayment(id) {
-    try {
-      const paymentConfirm = await stripe.paymentIntents.confirm(
-        id,
-        { payment_method: "pm_card_bypassPending" },
-        {
-          stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
-        }
-      );
-      console.log("TEsting ...." , paymentConfirm.id)
-    } catch (err) {
-      console.log(err.message);
-    }
-  
-  };
-  
-  // createcarge()
-  
-    // confirmPayment('pi_3Kw3CORIOJxyG0IV0RKEvmsT')
-  
+  );
+
+  return accountBankAccounts
+ }
 
 
 
 
-async function stripefunction(){
-//  let account = await createAccount()
-//  let account = await deleteAccount("acct_1KvyVXRAWrQRGkvO")
-//  let account= await updateAccount("acct_1Kw16QRIFrHDUENY")
-// let account= await getAccount("acct_1Kw16QRIFrHDUENY")
-// let bank = await createBankToken()
-//   let account= await createExternalAccount("acct_1Kw16QRIFrHDUENY")
-   let account = await createTopup ()
-  console.log(account);
+
+async function stripefunction() {
+  
+      // let account = await createBankToken()
+    // let account= await createExternalAccount("acct_1KvaUcIkon1wZ3rn")  
+    let account = await payout()
+
+ 
+  //  let account= await accountBankAccounts ()
+   console.log(account);
 }
 
 stripefunction()

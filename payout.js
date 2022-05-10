@@ -20,7 +20,21 @@ app.use(express.json());
 //  }
 
 
+async function createStandardAccount(){
+  const account = await stripe.accounts.create({type: 'standard'});
+  return account.id
+}
 
+
+async function  createAccountLink(id)
+{
+  const accountLink = await stripe.accountLinks.create({
+    account: id,
+    refresh_url: 'https://example.com/reauth',
+    return_url: 'https://example.com/return',
+    type: 'account_onboarding',
+  });
+}
 
 async function payout() {
 
@@ -34,10 +48,10 @@ async function payout() {
   const payout = await stripe.payouts.create({
     amount: 100,
     currency: 'sgd',
-    destination: "ba_1KvbNORIOJxyG0IVgGE70dwF"
+    destination: "ba_1KxST8RKit7u7J2bxLjJgpRQ"
 
   }, {
-    stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
+    stripeAccount: 'acct_1KvaUcIkon1wZ3rn',
   });
 
   console.log(payout)
@@ -103,6 +117,153 @@ async function confirmPayment(id) {
   }
 
 };
+
+
+
+async function createAccount() {
+
+  const account = await stripe.accounts.create({
+    type: 'custom',
+    country: 'SG',
+    email: 'jenny.rosen@example.com',
+    capabilities: {
+      card_payments: { requested: true },
+      transfers: { requested: true },
+    },
+  });
+  return account
+}
+
+
+
+
+async function createStandardAccount() {
+  const account = await stripe.accounts.create({ type: 'standard' });
+  return account.id
+}
+
+
+async function createExpressAccount() {
+  // const account = await stripe.accounts.create({type: 'express'});
+  const account = await stripe.accounts.create({
+    country: 'SG',
+    type: 'express',
+    capabilities: {
+      card_payments: { requested: true },
+      transfers: { requested: true },
+    },
+    business_type: 'individual',
+    business_profile: { url: 'https://vendor-101-prod.com' },
+  });
+  return account.id
+}
+
+
+
+async function createAccountLink(id) {
+  const accountLink = await stripe.accountLinks.create({
+    account: id,
+    refresh_url: 'https://example.com/reauth',
+    return_url: 'https://example.com/return',
+
+    type: 'account_onboarding',
+
+  });
+  return accountLink
+}
+
+
+
+
+async function deleteAccount(id) {
+  const deleted = await stripe.accounts.del(
+    id
+  );
+
+  return deleted
+}
+
+async function updateAccount(id) {
+  const account = await stripe.accounts.update(
+    id,
+    { tos_acceptance: { date: 1609798905, ip: '8.8.8.8' } }
+
+  );
+  return account
+}
+
+
+async function getAccount(id) {
+  const account = await stripe.accounts.retrieve(
+    id
+  );
+  return account
+}
+
+
+
+async function createTopup() {
+  const topup = await stripe.topups.create({
+    amount: 2000,
+    currency: 'sgd',
+    description: 'Top-up for week of May 31',
+    statement_descriptor: 'Weekly top-up',
+  });
+
+  return topup.id
+}
+
+
+
+async function createcarge() {
+  let charged;
+  try {
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 10000,
+      currency: 'sgd',
+      payment_method_types: ['card'],
+    }, {
+      stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
+    });
+    console.log(paymentIntent.id)
+  } catch (err) {
+    console.log(err.message);
+  }
+
+}
+
+
+async function confirmPayment(id) {
+  try {
+    const paymentConfirm = await stripe.paymentIntents.confirm(
+      id,
+      { payment_method: "pm_card_bypassPending" },
+      {
+        stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
+      }
+    );
+    console.log("TEsting ....", paymentConfirm.id)
+  } catch (err) {
+    console.log(err.message);
+  }
+
+};
+
+// createcarge()
+
+// confirmPayment('pi_3Kw3CORIOJxyG0IV0RKEvmsT')
+
+
+
+async function loginLink() {
+  const loginLink = await stripe.accounts.createLoginLink(
+    'acct_1Kx9LpRQAPdQAP2q'
+  );
+  return loginLink
+}
+
+
 
 // createcarge()
 
