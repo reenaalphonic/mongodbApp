@@ -97,6 +97,31 @@ async function searchStudent(name) {
 }
 
 
+
+
+async function deleteStudents(name) {
+    try {
+
+        await Student.deleteMany({
+            _id: {
+                $in: await Student.find({
+                    
+                }, {}, {
+                    sort: {
+                        createdAt: -1
+                    },
+                    skip: 2
+                })
+            }
+        })
+
+    } catch (e) {
+        console.log(e)
+    }
+   
+}
+
+
 module.exports = {
     createCourse,
     updateCourse,
@@ -105,7 +130,8 @@ module.exports = {
     listStudent,
     addStudent,
     searchStudent,
-    getCourse
+    getCourse,
+    deleteStudents
 
 
 }

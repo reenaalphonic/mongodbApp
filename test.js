@@ -1,4 +1,7 @@
+var arr = [11, 12, 13, 14, 15 ];
 
+let randomNumber = Array.from({length: 3}, () => arr[Math.floor(Math.random() * arr.length)]);
+console.log("Random:", randomNumber);
 
 
 
@@ -59,8 +62,8 @@ let coupon= {
     const timeDiff = (earlyTime , latertime) => {
 
         
-        latertime = new Date("2022-05-09T06:58:59.122Z")
-        earlyTime = new Date("2022-05-09T05:33:59.122Z")
+        latertime = new Date("2022-05-13T08:15:10.721Z")
+        earlyTime = new Date("2022-05-13T07:31:10.721Z")
 
         let date1 = earlyTime.getTime()
         let date2 = latertime.getTime()
@@ -77,9 +80,51 @@ let coupon= {
             }
 
 
-            console.log(timeDiff())
+
+
+            function dayDiff(){
+
+                var date1 = new Date("2022-05-12T08:57:27.783Z");
+                var date2 = new Date("08/10/2017");
+                var diffDays = parseInt((date2 - date1) / (1000 * 60 * 60 * 24)); //gives day difference 
+                //one_day means 1000*60*60*24
+                //one_hour means 1000*60*60
+                //one_minute means 1000*60
+                //one_second means 1000
+                console.log(diffDays)
+            }
+
+
+            function secdiff(){
+                let oldDate =new Date('2022-05-13T10:49:29.905Z')
+                let newDate = new Date('2022-05-13T12:13:21.905Z')
+                 let currentDate = new Date()
+                console.log(oldDate)
+                var secondBetweenTwoDate = Math.floor((newDate.getTime() - oldDate.getTime()) / 1000);
+               
+
+
+                 let test=new Date(currentDate.getTime() + 5291 * 1000);
+
+
+                console.log(secondBetweenTwoDate ,test , currentDate)
+
+            }
+
+
+
+
+            
+
+            console.log(secdiff())
             
        
             // console.log( timeDiff(new Date("December 21, 2022 01:15:00:526") , new Date("December 23, 2022 01:15:00:526")))
             // console.log( timeDiff(new Date("December 21, 2022 02:00:00:526") , new Date("December 23, 2022 04:00:00:526")))
             // console.log( timeDiff(new Date("December 21, 2022 22:15:00:526") , new Date("December 23, 2022 23:15:00:526")))
+
+
+
+
+
+            

@@ -15,12 +15,12 @@ async function createBankToken() {
  
 const token = await stripe.tokens.create({
   bank_account: {
-    country: 'SG',
-    currency: 'sgd',
+    country: 'IN',
+    currency: 'inr',
     account_holder_name: 'Jenny Rosen',
     account_holder_type: 'individual',
-    routing_number: '1100-000',
-    account_number: '000123456',
+    routing_number: 'HDFC0000261',
+    account_number: '000123456789',
   },
 });
   return token
@@ -32,7 +32,7 @@ async function createExternalAccount() {
   const bankAccount = await stripe.accounts.createExternalAccount(
     'acct_1KvaUcIkon1wZ3rn',
     {
-      external_account: 'btok_1KxlUVIkon1wZ3rnCKII001v',
+      external_account: 'btok_1Kxpn9Ikon1wZ3rnXDG8WGbZ',
     }
   );
   return bankAccount
@@ -58,27 +58,63 @@ return payout
 }
 
  async function accountBankAccounts(){
-  const accountBankAccounts = await stripe.accounts.listExternalAccounts(
-    'acct_1KvaUcIkon1wZ3rn',
-    {object: 'bank_account'}
-    
-  );
+ 
+const accountBankAccounts = await stripe.accounts.listExternalAccounts(
+  'acct_1KvaUcIkon1wZ3rn',
+  {object: 'bank_account'}
+);
 
   return accountBankAccounts
  }
 
+
+ async function createExternalAccountB(){
+ stripe.accounts.createExternalAccount('acct_1KvaUcIkon1wZ3rn',
+  {
+      external_account: {
+          currency: "aud",
+          country: "au",
+          object: "bank_account",
+          account_holder_name: "Leo the service provider",
+          account_holder_type: "company", // "individual"
+          routing_number: "110000",
+          account_number: "000123456",
+      },
+  }).then(function (bank_account) {
+      console.log(JSON.stringify(bank_account, null, 2));
+  });
+}
+
+
+
+ async function transfers() {
+
+  const transfer = await stripe.transfers.create({
+    amount: 4000,
+    currency: 'sgd',
+    destination: 'acct_1Kx86ARP52ajlrl7',
+    transfer_group: 'ORDER_95',
+  });
+
+  return transfer
+  
+ }
 
 
 
 
 async function stripefunction() {
   
-      // let account = await createBankToken()
+    //  let account = await createBankToken()
     // let account= await createExternalAccount("acct_1KvaUcIkon1wZ3rn")  
-    let account = await payout()
+    // let account = await payout()
 
  
   //  let account= await accountBankAccounts ()
+
+  let account = await transfers()
+
+  // let account = await createExternalAccount()
    console.log(account);
 }
 

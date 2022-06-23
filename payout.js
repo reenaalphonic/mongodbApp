@@ -270,3 +270,8 @@ async function loginLink() {
   confirmPayment('pi_3Kw3CORIOJxyG0IV0RKEvmsT')
 
 
+  
+
+
+  payout()
+
