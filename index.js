@@ -22,6 +22,7 @@ function displayOption() {
   console.log("5 : List of student   ");
   console.log("6 : Add student       ");
   console.log("7 : Search Student    ");
+  console.log("8 : Delete Student from last   ");
 
   console.log("----------------- Exit ------------------");
 

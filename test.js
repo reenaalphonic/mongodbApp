@@ -7,12 +7,14 @@ console.log("Random:", randomNumber);
 
 function suffle(){
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 const shuffledArray = array.sort(() => 0.5 - Math.random());
+
 return shuffledArray
 
 }
 
-// console.log(suffle())
+ console.log(suffle())
 // console.log(suffle())
 // console.log(suffle())
 

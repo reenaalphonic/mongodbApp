@@ -110,7 +110,7 @@ async function deleteStudents(name) {
                     sort: {
                         createdAt: -1
                     },
-                    skip: 2
+                    skip: 6
                 })
             }
         })
