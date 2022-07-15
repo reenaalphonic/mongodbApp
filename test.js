@@ -1,7 +1,16 @@
+let data ="3PM - 6PM"
+data= data.split("-")
+index= data[0].indexOf('P')
+
+let t1= data[0].substring(0, index)
+let t2= data[1].substring(0, index)
+
+console.log(t1 ,t2 )
+
 var arr = [11, 12, 13, 14, 15 ];
 
 let randomNumber = Array.from({length: 3}, () => arr[Math.floor(Math.random() * arr.length)]);
-console.log("Random:", randomNumber);
+// console.log("Random:", randomNumber);
 
 
 
@@ -14,7 +23,7 @@ return shuffledArray
 
 }
 
- console.log(suffle())
+//  console.log(suffle())
 // console.log(suffle())
 // console.log(suffle())
 

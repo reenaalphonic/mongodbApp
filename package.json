@@ -17,6 +17,7 @@
     "ioredis": "^4.28.5",
     "mongoose": "^6.2.1",
     "node-cache": "^5.1.2",
+    "node-fetch": "^2.6.7",
     "nodemon": "^2.0.15",
     "razorpay": "^2.8.1",
     "readline-sync": "^1.4.10",
