@@ -55,6 +55,29 @@ const createRoom = (room) => {
     .catch((err) => console.log("error:" + err));
 };
 
+const createRoom2 = (room) => {
+   axios.post("https://api.daily.co/v1/rooms", {
+    name: "room456",
+    properties: {
+      enable_screenshare: true,
+      enable_chat: true,
+      start_video_off: true,
+      start_audio_off: false,
+      lang: "en",
+    },
+  },
+     {headers:headers},
+   )
+    .then((res) => {
+      console.log(res.data)
+      return res.data
+    })
+   
+    .catch((err) =>{
+      console.log(err)
+      console.log("error:" + err)});
+};
+
 app.get("/video-call/:id", async function (req, res) {
   const roomId = req.params.id;
 
@@ -70,6 +93,6 @@ app.get("/video-call/:id", async function (req, res) {
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server Running on port ${port}`));
 
-createRoom("room");
+console.log(createRoom2("room"))
 
 // module.exports = app;

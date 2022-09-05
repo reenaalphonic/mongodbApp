@@ -29,6 +29,8 @@ async function createContact() {
     data: body
   };
 
+
+
   axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
@@ -40,7 +42,8 @@ async function createContact() {
 }
 // {"id":"cont_JRPIdF1b4pKPzi","entity":"contact","name":"Reena Mehta","contact":"9123456789","email":"test@example.com","type":"employee","reference_id":null,"batch_id":null,"active":true,"notes":{"notes_key_1":"Tea, Earl Grey, Hot","notes_key_2":"Tea, Earl Grey… decaf."},"created_at":1651723325}
 
-// createContact()
+  // let data =createContact()
+  // console.log(data)
 
 
 async function createBank() {
@@ -51,7 +54,7 @@ async function createBank() {
     "bank_account": {
       "name": "ReenaMehta",
       "ifsc": "RAZR0000001",
-      "account_number": "2323230072743209"
+      "account_number": "2323 2300 7274 3209"
     }
   }
 
@@ -197,11 +200,12 @@ async function createWallet() {
 async function createPayOutBank() {
 
   let body = {
+    //  spijio  ---  2323230038860077
      "account_number": "2323230072743209",
-    // "fund_account_id": "fa_JRQ5G74nx3egx2", // Bank Account
-    // "mode": "IMPS",
-     "fund_account_id": "fa_JRQNNDnfE2RZJN" ,//VPA - UPI ac
-     "mode": "UPI",
+     "fund_account_id": "fa_JRQ5G74nx3egx2", // Bank Account
+    "mode": "NEFT",
+    //  "fund_account_id": "fa_JRQNNDnfE2RZJN" ,//VPA - UPI ac
+    //  "mode": "UPI",
     //  "fund_account_id": "fa_JRQu2ENhlW3WGr" ,//VPA - UPI ac
     // "mode": "amazonpay",
     "amount": 1000,
@@ -234,7 +238,7 @@ async function createPayOutBank() {
     });
 
 }
-//  createPayOutBank()
+ createPayOutBank()
 
 
 async function check() {
@@ -255,4 +259,4 @@ async function check() {
 
 
 
-check() 
+//  check() 

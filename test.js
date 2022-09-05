@@ -127,7 +127,7 @@ let coupon= {
 
             
 
-            console.log(secdiff())
+            // console.log(secdiff())
             
        
             // console.log( timeDiff(new Date("December 21, 2022 01:15:00:526") , new Date("December 23, 2022 01:15:00:526")))
@@ -135,7 +135,18 @@ let coupon= {
             // console.log( timeDiff(new Date("December 21, 2022 22:15:00:526") , new Date("December 23, 2022 23:15:00:526")))
 
 
+function addDays(){
+    let today = new Date()
+           
+    let test =today.getTime() + 1000 * 86400 * 1                     
+    console.log("next date....." , today , new Date(test))
+
+}
+
+addDays()
 
 
+           
+    
 
             
