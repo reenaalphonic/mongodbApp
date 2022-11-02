@@ -1,4 +1,5 @@
-const stripe = require('stripe')('sk_test_51KvaUcIkon1wZ3rnjWEHnthawh3XEDZubuEpyBsIMlfng759qOfpvJxj9aGn9qln93odVMk9mIylVMJalf1rl1JI00muvJgXAu');
+// const stripe = require('stripe')('sk_test_51KvaUcIkon1wZ3rnjWEHnthawh3XEDZubuEpyBsIMlfng759qOfpvJxj9aGn9qln93odVMk9mIylVMJalf1rl1JI00muvJgXAu');
+const stripe = require('stripe')('sk_test_51LOKJtHVZzMAx56hj56jHfBX49lnRWIt966AZjdBVIfTmnlRdB4yIsb1XxarGJlS4oqlQti2JWaXo4LFeU4fTFhE004LiUkD7v')
 const express = require('express');
 const app = express();
 app.use(express.static('public'));
@@ -36,26 +37,26 @@ async function  createAccountLink(id)
   });
 }
 
-async function payout() {
+// async function payout() {
 
 
 
-  //  let bal =await stripe.balance.retrieve( 
-  //   {stripe_account: 'acct_1Kvas0RIOJxyG0IV'}
-  //  );
+//   //  let bal =await stripe.balance.retrieve( 
+//   //   {stripe_account: 'acct_1Kvas0RIOJxyG0IV'}
+//   //  );
 
 
-  const payout = await stripe.payouts.create({
-    amount: 100,
-    currency: 'sgd',
-    destination: "ba_1KxST8RKit7u7J2bxLjJgpRQ"
+//   const payout = await stripe.payouts.create({
+//     amount: 100,
+//     currency: 'sgd',
+//     destination: "ba_1KxST8RKit7u7J2bxLjJgpRQ"
 
-  }, {
-    stripeAccount: 'acct_1KvaUcIkon1wZ3rn',
-  });
+//   }, {
+//     stripeAccount: 'acct_1LOKJtHVZzMAx56h',
+//   });
 
-  console.log(payout)
-}
+//   console.log(payout)
+// }
 
 // async function Instantpayout(){
 // const payout = await stripe.payouts.create({
@@ -72,34 +73,34 @@ async function payout() {
 
 
 async function createcarge() {
-  //  const paymentIntent = await stripe.paymentIntents.create({
-  //    amount: 1000,
-  //    currency: 'sgd',
-  //  }, {
-  //    stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
+   const paymentIntent = await stripe.paymentIntents.create({
+     amount: 100000,
+     currency: 'sgd',
+   }, {
+     stripeAccount: 'acct_1LOKJtHVZzMAx56h',
 
-  //  });
+   });
 
 }
 
 
-async function createcarge() {
-  let charged;
-  try {
+// async function createcarge() {
+//   let charged;
+//   try {
   
-  const paymentIntent = await stripe.paymentIntents.create({
-  amount: 10000,
-  currency: 'sgd',
-  payment_method_types: ['card'],
-}, {
-  stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
-});
-    console.log(paymentIntent.id)
-  } catch (err) {
-    console.log(err.message);
-  }
+//   const paymentIntent = await stripe.paymentIntents.create({
+//   amount: 10000,
+//   currency: 'sgd',
+//   payment_method_types: ['card'],
+// }, {
+//   stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
+// });
+//     console.log(paymentIntent.id)
+//   } catch (err) {
+//     console.log(err.message);
+//   }
 
-}
+// }
 
 
 async function confirmPayment(id) {
@@ -220,11 +221,11 @@ async function createcarge() {
   try {
 
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 10000,
+      amount: 100000,
       currency: 'sgd',
       payment_method_types: ['card'],
     }, {
-      stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
+      stripeAccount: 'acct_1LOKJtHVZzMAx56h',
     });
     console.log(paymentIntent.id)
   } catch (err) {
@@ -240,7 +241,7 @@ async function confirmPayment(id) {
       id,
       { payment_method: "pm_card_bypassPending" },
       {
-        stripeAccount: 'acct_1Kvas0RIOJxyG0IV',
+        stripeAccount: 'acct_1LOKJtHVZzMAx56h',
       }
     );
     console.log("TEsting ....", paymentConfirm.id)
@@ -252,7 +253,7 @@ async function confirmPayment(id) {
 
 // createcarge()
 
-// confirmPayment('pi_3Kw3CORIOJxyG0IV0RKEvmsT')
+confirmPayment('pi_3LlQjhHVZzMAx56h0IR3d5vj')
 
 
 
@@ -267,11 +268,11 @@ async function loginLink() {
 
 // createcarge()
 
-  confirmPayment('pi_3Kw3CORIOJxyG0IV0RKEvmsT')
+   confirmPayment('pi_3LlQo8HVZzMAx56h0NOjYu4K')
 
 
   
 
 
-  payout()
+  // payout()
 
